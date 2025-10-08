@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Quand le bouton est cliqué -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#d18e00"/> <!-- Couleur plus foncée -->
+            <corners android:radius="15dp"/>
+        </shape>
+    </item>
+
+    <!-- État normal -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#f0a625"/> <!-- Couleur normale -->
+            <corners android:radius="15dp"/>
+        </shape>
+    </item>
+
+</selector>

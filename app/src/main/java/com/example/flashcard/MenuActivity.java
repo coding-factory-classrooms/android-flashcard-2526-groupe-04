@@ -36,14 +36,14 @@ public class MenuActivity extends AppCompatActivity {
         // Button "Statistiques"
         Button stats = findViewById(R.id.statsButton);
         stats.setOnClickListener(v -> {
-            Intent intent = new Intent(this, StatsActivity.class);
+            Intent intent = new Intent(this, GlobalStatsActivity.class);
             startActivity(intent);
         });
 
         // Button "Liste des questions"
         Button list = findViewById(R.id.itemListButton);
         list.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ListActivity.class);
+            Intent intent = new Intent(this, ItemListActivity.class);
             startActivity(intent);
         });
 
