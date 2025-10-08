@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Flashcard</string>
+    <string name="quiz_results_title">Résultat du quiz</string>
 </resources>

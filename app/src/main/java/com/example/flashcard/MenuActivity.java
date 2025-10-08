@@ -1,7 +1,9 @@
 package com.example.flashcard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,5 +27,14 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         Log.d(TAG, "Hello Flashcard");
+
+        Button btnTestStats = findViewById(R.id.btnTestStats);
+        btnTestStats.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, StatsActivity.class);
+            intent.putExtra("QUIZ_DIFFICULTY", "Facile");  // Dummy data
+            intent.putExtra("CORRECT_ANSWERS", 5);
+            intent.putExtra("TOTAL_QUESTIONS", 10);
+            startActivity(intent);
+        });
     }
 }
