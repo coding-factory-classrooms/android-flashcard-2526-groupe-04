@@ -7,13 +7,46 @@
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/quizButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="320dp"
+        android:text="Jouer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/itemListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Statistiques"
+        app:layout_constraintEnd_toEndOf="@+id/statsButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/statsButton"
+        app:layout_constraintTop_toBottomOf="@+id/statsButton" />
+
+    <Button
+        android:id="@+id/aboutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="À propos"
+        app:layout_constraintEnd_toEndOf="@+id/itemListButton"
+        app:layout_constraintStart_toStartOf="@+id/itemListButton"
+        app:layout_constraintTop_toBottomOf="@+id/itemListButton" />
+
+    <Button
+        android:id="@+id/statsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Statistiques"
+        app:layout_constraintEnd_toEndOf="@+id/quizButton"
+        app:layout_constraintStart_toStartOf="@+id/quizButton"
+        app:layout_constraintTop_toBottomOf="@+id/quizButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

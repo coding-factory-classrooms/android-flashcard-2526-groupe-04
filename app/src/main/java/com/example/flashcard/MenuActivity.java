@@ -24,6 +24,6 @@ public class MenuActivity extends AppCompatActivity {
             return insets;
         });
 
-        Log.d(TAG, "Hello Flashcard");
+
     }
 }
