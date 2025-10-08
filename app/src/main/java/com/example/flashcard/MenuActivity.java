@@ -2,6 +2,8 @@ package com.example.flashcard;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.RadioGroup;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,9 @@ public class MenuActivity extends AppCompatActivity {
             return insets;
         });
 
-        Log.d(TAG, "Hello Flashcard");
+
+
+
+
     }
 }

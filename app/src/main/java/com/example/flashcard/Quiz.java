@@ -21,20 +21,22 @@ public class Quiz implements Parcelable {
         public String answer;
         public String filePath;
         public int numberOfAnswers;
-        public ImageView picture;
+        public int picture;
 
 
-        public Question(String answer, String filePath, int numberOfAnswers, ImageView picture) {
+        public Question(String answer, String filePath, int numberOfAnswers, int picture) {
             this.answer = answer;
             this.filePath = filePath;
             this.numberOfAnswers = numberOfAnswers;
             this.picture = picture;
         }
 
+
         protected Question(Parcel in) {
             answer = in.readString();
             filePath = in.readString();
             numberOfAnswers = in.readInt();
+            picture = in.readInt();
         }
 
         @Override
@@ -42,6 +44,7 @@ public class Quiz implements Parcelable {
             dest.writeString(answer);
             dest.writeString(filePath);
             dest.writeInt(numberOfAnswers);
+            dest.writeInt(picture);
         }
 
         @Override
