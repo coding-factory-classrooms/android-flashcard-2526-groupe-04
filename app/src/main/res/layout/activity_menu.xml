@@ -14,7 +14,6 @@
         android:layout_marginTop="320dp"
         android:text="Jouer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,9 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Statistiques"
+        android:text="Liste des questions"
         app:layout_constraintEnd_toEndOf="@+id/statsButton"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/statsButton"
         app:layout_constraintTop_toBottomOf="@+id/statsButton" />
 
@@ -36,6 +34,7 @@
         android:layout_marginTop="48dp"
         android:text="À propos"
         app:layout_constraintEnd_toEndOf="@+id/itemListButton"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="@+id/itemListButton"
         app:layout_constraintTop_toBottomOf="@+id/itemListButton" />
 

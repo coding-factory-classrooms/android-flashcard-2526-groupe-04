@@ -1,7 +1,9 @@
 package com.example.flashcard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,33 @@ public class MenuActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Button "Jouer"
+        Button quiz = findViewById(R.id.quizButton);
+        quiz.setOnClickListener(v -> {
+            Intent intent = new Intent(this, QuizActivity.class);
+            startActivity(intent);
+        });
+
+        // Button "Statistiques"
+        Button stats = findViewById(R.id.statsButton);
+        stats.setOnClickListener(v -> {
+            Intent intent = new Intent(this, StatsActivity.class);
+            startActivity(intent);
+        });
+
+        // Button "Liste des questions"
+        Button list = findViewById(R.id.itemListButton);
+        list.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ListActivity.class);
+            startActivity(intent);
+        });
+
+        // Button "À propos"
+        Button about = findViewById(R.id.aboutButton);
+        about.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+        });
 
     }
 }
