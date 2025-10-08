@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/audioButton" />
 
     <RadioButton
-        android:id="@+id/radioButton"
+        android:id="@+id/answer1RadioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -39,22 +39,22 @@
         app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
 
     <RadioButton
-        android:id="@+id/radioButton2"
+        android:id="@+id/answer2RadioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2e Réponse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+        app:layout_constraintTop_toBottomOf="@+id/answer1RadioButton" />
 
     <RadioButton
-        android:id="@+id/radioButton3"
+        android:id="@+id/answer3RadioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="3e Réponse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/answer2RadioButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
