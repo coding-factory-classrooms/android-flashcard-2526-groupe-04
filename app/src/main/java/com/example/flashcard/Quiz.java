@@ -1,9 +1,11 @@
 package com.example.flashcard;
-import android.media.Image;
+
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.ImageView;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Quiz implements Parcelable {
     public ArrayList<Question> questions;
@@ -22,13 +24,24 @@ public class Quiz implements Parcelable {
         public String filePath;
         public int numberOfAnswers;
         public int picture;
+        public ArrayList<String> choices;
 
-
-        public Question(String answer, String filePath, int numberOfAnswers, int picture) {
+        public Question(String answer, String filePath, List<String> choices, int picture) {
             this.answer = answer;
             this.filePath = filePath;
-            this.numberOfAnswers = numberOfAnswers;
             this.picture = picture;
+            if (choices == null) {
+                this.choices = new ArrayList<>();
+            } else if (choices instanceof ArrayList) {
+                this.choices = new ArrayList<>(choices);
+            } else {
+                this.choices = new ArrayList<>(choices);
+            }
+            this.numberOfAnswers = this.choices.size();
+        }
+
+        public List<String> getChoices() {
+            return new ArrayList<>(choices);
         }
 
 
@@ -37,6 +50,9 @@ public class Quiz implements Parcelable {
             filePath = in.readString();
             numberOfAnswers = in.readInt();
             picture = in.readInt();
+            ArrayList<String> restoredChoices = in.createStringArrayList();
+            choices = Objects.requireNonNullElseGet(restoredChoices, ArrayList::new);
+            numberOfAnswers = choices.size();
         }
 
         @Override
@@ -45,6 +61,7 @@ public class Quiz implements Parcelable {
             dest.writeString(filePath);
             dest.writeInt(numberOfAnswers);
             dest.writeInt(picture);
+            dest.writeStringList(choices);
         }
 
         @Override
@@ -52,7 +69,7 @@ public class Quiz implements Parcelable {
             return 0;
         }
 
-        public static final Creator<Question> CREATOR = new Creator<Question>() {
+        public static final Creator<Question> CREATOR = new Creator<>() {
             @Override
             public Question createFromParcel(Parcel in) {
                 return new Question(in);
@@ -85,7 +102,7 @@ public class Quiz implements Parcelable {
         difficulty = in.readInt();
     }
 
-    public static final Creator<Quiz> CREATOR = new Creator<Quiz>() {
+    public static final Creator<Quiz> CREATOR = new Creator<>() {
         @Override
         public Quiz createFromParcel(Parcel in) {
             return new Quiz(in);

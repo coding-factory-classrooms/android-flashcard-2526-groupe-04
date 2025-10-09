@@ -2,16 +2,20 @@ package com.example.flashcard;
 
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import java.util.Locale;
 
 public class StatsActivity extends AppCompatActivity {
+
+    private static final String EXTRA_STATS_DIFFICULTY = "QUIZ_DIFFICULTY";
+    private static final String EXTRA_STATS_CORRECT = "CORRECT_ANSWERS";
+    private static final String EXTRA_STATS_TOTAL = "TOTAL_QUESTIONS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +32,14 @@ public class StatsActivity extends AppCompatActivity {
         TextView textViewDifficulty = findViewById(R.id.textViewDifficulty);
         TextView textViewScore = findViewById(R.id.textViewScore);
         TextView textViewPercentage = findViewById(R.id.textViewPercentage);
+        Button backToMenu = findViewById(R.id.buttonBackToMenu);
 
-        String difficulty = getIntent().getStringExtra("QUIZ_DIFFICULTY");
-        int correctAnswers = getIntent().getIntExtra("CORRECT_ANSWERS", 0);
-        int totalQuestions = getIntent().getIntExtra("TOTAL_QUESTIONS", 0);
+        String difficulty = getIntent().getStringExtra(EXTRA_STATS_DIFFICULTY);
+        if (difficulty == null || difficulty.isEmpty()) {
+            difficulty = getString(R.string.quiz_difficulty_unknown);
+        }
+        int correctAnswers = getIntent().getIntExtra(EXTRA_STATS_CORRECT, 0);
+        int totalQuestions = getIntent().getIntExtra(EXTRA_STATS_TOTAL, 0);
 
         double percentage = (totalQuestions > 0)
                 ? ((double) correctAnswers / totalQuestions) * 100
@@ -41,9 +49,11 @@ public class StatsActivity extends AppCompatActivity {
         textViewScore.setText(getString(R.string.score_label, correctAnswers, totalQuestions));
         textViewPercentage.setText(getString(R.string.success_label, percentage));
 
-
-        Intent intent = new Intent(this, QuizActivity.class);
-        intent.putExtra("percentage", percentage);
-        startActivity(intent);
+        backToMenu.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MenuActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
+        });
     }
 }

@@ -7,5 +7,22 @@
     <string name="success_label">Réussite : %1$.0f%%</string>
     <string name="group">Groupe 4</string>
     <string name="version_label">Version : %1$s</string>
-    <string name="version_error">Erreur</string>"
+    <string name="version_error">Erreur</string>
+    <string name="quiz_loading">Chargement...</string>
+    <string name="quiz_validate">Valider</string>
+    <string name="quiz_next">Suivant</string>
+    <string name="quiz_finish">Terminer</string>
+    <string name="quiz_select_answer">Veuillez sélectionner une réponse.</string>
+    <string name="quiz_correct">Bonne réponse.</string>
+    <string name="quiz_wrong">Mauvaise réponse.</string>
+    <string name="quiz_error_no_questions">Aucune question récupérée.</string>
+    <string name="quiz_error_load">Impossible de charger le quiz.</string>
+    <string name="quiz_toast_questions_error">Impossible de charger les questions.</string>
+    <string name="quiz_progress">Question %1$d / %2$d</string>
+    <string name="quiz_difficulty_easy">Facile</string>
+    <string name="quiz_difficulty_medium">Moyen</string>
+    <string name="quiz_difficulty_hard">Difficile</string>
+    <string name="quiz_difficulty_hardcore">Hardcore</string>
+    <string name="quiz_difficulty_unknown">Inconnu</string>
+    <string name="quiz_back_to_menu">Retour au menu</string>
 </resources>
