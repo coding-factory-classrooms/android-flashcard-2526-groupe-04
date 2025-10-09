@@ -45,6 +45,7 @@ public class QuizActivity extends AppCompatActivity {
         liste.add(question1);
         Quiz quiz = new Quiz(liste,1);
         setupAnswers(quiz.questions.get(0));
+        dynamicAnswers(quiz.questions.get(0));
 
 
         Button validButton = findViewById(R.id.validationButton);
@@ -60,6 +61,17 @@ public class QuizActivity extends AppCompatActivity {
         int id = answerRadioGroup.getChildAt((int) (Math.random()*3)).getId();
         TextView view = findViewById(id);
         view.setText(question.answer);
+    }
+
+    public void dynamicAnswers(Quiz.Question question){
+        // pour chaque reponses que je veux, je créer un radioButton
+        RadioGroup radioGroup = findViewById(R.id.answerRadioGroup);
+        for(int i = 0; i < question.numberOfAnswers; i++ ){
+            // instancie nouveau radioButton
+            RadioButton radioButton = new RadioButton(this);
+            radioButton.setText(question.answer);
+            radioGroup.addView(radioButton);
+        }
     }
 
     public void checkResult(Quiz.Question question){
