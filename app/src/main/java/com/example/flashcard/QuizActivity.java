@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -47,6 +49,9 @@ public class QuizActivity extends AppCompatActivity {
     private String difficultyLabel;
     private DifficultyConfig difficultyConfig;
     private boolean singleQuestionMode = false;
+    private boolean hardcoreMode = false;
+    private boolean timeAttackMode = false;
+    private int defaultResultTextColor;
 
     private RadioGroup answerRadioGroup;
     private TextView questionTextView;
@@ -54,6 +59,7 @@ public class QuizActivity extends AppCompatActivity {
     private ImageView questionImageView;
     private Button validationButton;
     private Button playButton;
+    private MediaPlayer explosionPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +80,18 @@ public class QuizActivity extends AppCompatActivity {
             return;
         }
 
-        int difficultyLevel = getIntent().getIntExtra(EXTRA_DIFFICULTY, 0);
+        Intent launchIntent = getIntent();
+        int difficultyLevel = launchIntent != null ? launchIntent.getIntExtra(EXTRA_DIFFICULTY, 0) : 0;
+        hardcoreMode = launchIntent != null && launchIntent.getBooleanExtra(EXTRA_HARDCORE_MODE, false);
+        timeAttackMode = launchIntent != null && launchIntent.getBooleanExtra(EXTRA_TIME_ATTACK_MODE, false);
+
         difficultyConfig = resolveDifficultyConfig(difficultyLevel);
         difficultyLabel = getString(difficultyConfig.labelResId);
+
+        if (hardcoreMode) {
+            difficultyConfig = new DifficultyConfig(difficultyConfig.questionCount, 6, R.string.quiz_difficulty_hardcore);
+            difficultyLabel = getString(R.string.quiz_difficulty_hardcore);
+        }
 
         fetchQuizData(this, difficultyLevel, difficultyConfig.choiceCount);
     }
@@ -88,6 +103,8 @@ public class QuizActivity extends AppCompatActivity {
         questionImageView = findViewById(R.id.imageView);
         validationButton = findViewById(R.id.validationButton);
         playButton = findViewById(R.id.audioButton);
+
+    defaultResultTextColor = resultTextView.getCurrentTextColor();
 
         questionTextView.setText(getString(R.string.quiz_loading));
         resultTextView.setVisibility(View.INVISIBLE);
@@ -170,7 +187,8 @@ public class QuizActivity extends AppCompatActivity {
 
         currentQuestion = quiz.questions.get(currentQuestionIndex);
         answered = false;
-        resultTextView.setVisibility(View.INVISIBLE);
+    resultTextView.setVisibility(View.INVISIBLE);
+    resultTextView.setTextColor(defaultResultTextColor);
         validationButton.setEnabled(true);
         validationButton.setText(getString(R.string.quiz_validate));
 
@@ -197,6 +215,8 @@ public class QuizActivity extends AppCompatActivity {
             radioButton.setText(choice);
             answerRadioGroup.addView(radioButton);
         }
+
+        setAnswerInputsEnabled(true);
     }
 
     private MediaPlayer setupMediaPlayer(String audioName) {
@@ -222,10 +242,14 @@ public class QuizActivity extends AppCompatActivity {
         boolean isCorrect = userAnswer.equalsIgnoreCase(currentQuestion.answer);
 
         resultTextView.setVisibility(VISIBLE);
+        resultTextView.setTextColor(defaultResultTextColor);
         resultTextView.setText(isCorrect ? getString(R.string.quiz_correct) : getString(R.string.quiz_wrong));
 
         if (isCorrect) {
             correctAnswers += 1;
+        } else if (hardcoreMode) {
+            handleHardcoreFailure();
+            return false;
         }
 
         if (currentQuestion.picture != 0) {
@@ -270,10 +294,44 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    private void handleHardcoreFailure() {
+    resultTextView.setText("Explosion ! Mauvaise réponse en mode Hardcore.");
+        resultTextView.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_light));
+        validationButton.setEnabled(false);
+    validationButton.setText("Boom !!");
+        setAnswerInputsEnabled(false);
+
+        View root = findViewById(R.id.main);
+        if (root != null) {
+            root.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+        }
+
+        playExplosionSound();
+        validationButton.postDelayed(() -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                finishAndRemoveTask();
+            } else {
+                finishAffinity();
+            }
+            finishAffinity();
+            Process.killProcess(Process.myPid());
+            System.exit(0);
+        }, 800L);
+    }
+
+    private void setAnswerInputsEnabled(boolean enabled) {
+        for (int i = 0; i < answerRadioGroup.getChildCount(); i++) {
+            View child = answerRadioGroup.getChildAt(i);
+            child.setEnabled(enabled);
+        }
+        answerRadioGroup.setEnabled(enabled);
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
         releaseMediaPlayer();
+        releaseExplosionPlayer();
     }
 
     private DifficultyConfig resolveDifficultyConfig(int difficulty) {
@@ -325,6 +383,29 @@ public class QuizActivity extends AppCompatActivity {
             this.questionCount = questionCount;
             this.choiceCount = choiceCount;
             this.labelResId = labelResId;
+        }
+    }
+
+
+    private void playExplosionSound() {
+        releaseExplosionPlayer();
+        explosionPlayer = MediaPlayer.create(this, R.raw.explosion);
+        if (explosionPlayer == null) {
+            return;
+        }
+        explosionPlayer.setLooping(false);
+        explosionPlayer.setVolume(1f, 1f);
+        explosionPlayer.setOnCompletionListener(player -> {
+            player.release();
+            explosionPlayer = null;
+        });
+        explosionPlayer.start();
+    }
+
+    private void releaseExplosionPlayer() {
+        if (explosionPlayer != null) {
+            explosionPlayer.release();
+            explosionPlayer = null;
         }
     }
 }
