@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Process;
 import android.view.View;
 import android.widget.Button;
@@ -52,14 +53,17 @@ public class QuizActivity extends AppCompatActivity {
     private boolean hardcoreMode = false;
     private boolean timeAttackMode = false;
     private int defaultResultTextColor;
+    private int selectedDifficultyLevel = 0;
 
     private RadioGroup answerRadioGroup;
     private TextView questionTextView;
     private TextView resultTextView;
+    private TextView timerTextView;
     private ImageView questionImageView;
     private Button validationButton;
     private Button playButton;
     private MediaPlayer explosionPlayer;
+    private CountDownTimer questionTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,7 @@ public class QuizActivity extends AppCompatActivity {
 
         Intent launchIntent = getIntent();
         int difficultyLevel = launchIntent != null ? launchIntent.getIntExtra(EXTRA_DIFFICULTY, 0) : 0;
+        selectedDifficultyLevel = difficultyLevel;
         hardcoreMode = launchIntent != null && launchIntent.getBooleanExtra(EXTRA_HARDCORE_MODE, false);
         timeAttackMode = launchIntent != null && launchIntent.getBooleanExtra(EXTRA_TIME_ATTACK_MODE, false);
 
@@ -100,11 +105,12 @@ public class QuizActivity extends AppCompatActivity {
         answerRadioGroup = findViewById(R.id.answerRadioGroup);
         questionTextView = findViewById(R.id.questionTextView);
         resultTextView = findViewById(R.id.resultText);
+        timerTextView = findViewById(R.id.timerTextView);
         questionImageView = findViewById(R.id.imageView);
         validationButton = findViewById(R.id.validationButton);
         playButton = findViewById(R.id.audioButton);
 
-    defaultResultTextColor = resultTextView.getCurrentTextColor();
+        defaultResultTextColor = resultTextView.getCurrentTextColor();
 
         questionTextView.setText(getString(R.string.quiz_loading));
         resultTextView.setVisibility(View.INVISIBLE);
@@ -184,11 +190,12 @@ public class QuizActivity extends AppCompatActivity {
 
     private void showQuestion() {
         releaseMediaPlayer();
+        cancelTimeAttackTimer();
 
         currentQuestion = quiz.questions.get(currentQuestionIndex);
         answered = false;
-    resultTextView.setVisibility(View.INVISIBLE);
-    resultTextView.setTextColor(defaultResultTextColor);
+        resultTextView.setVisibility(View.INVISIBLE);
+        resultTextView.setTextColor(defaultResultTextColor);
         validationButton.setEnabled(true);
         validationButton.setText(getString(R.string.quiz_validate));
 
@@ -200,6 +207,8 @@ public class QuizActivity extends AppCompatActivity {
         populateAnswers(currentQuestion.getChoices());
         mediaPlayer = setupMediaPlayer(currentQuestion.filePath);
         playButton.setEnabled(mediaPlayer != null);
+
+        startTimeAttackTimer();
     }
 
     private void populateAnswers(List<String> choices) {
@@ -241,6 +250,8 @@ public class QuizActivity extends AppCompatActivity {
         String userAnswer = button.getText().toString();
         boolean isCorrect = userAnswer.equalsIgnoreCase(currentQuestion.answer);
 
+        cancelTimeAttackTimer();
+
         resultTextView.setVisibility(VISIBLE);
         resultTextView.setTextColor(defaultResultTextColor);
         resultTextView.setText(isCorrect ? getString(R.string.quiz_correct) : getString(R.string.quiz_wrong));
@@ -265,6 +276,8 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void goToNextStep() {
+        cancelTimeAttackTimer();
+
         if (hasNextQuestion()) {
             currentQuestionIndex += 1;
             showQuestion();
@@ -294,11 +307,102 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    private void startTimeAttackTimer() {
+        if (!timeAttackMode || singleQuestionMode) {
+            if (timerTextView != null) {
+                timerTextView.setVisibility(View.GONE);
+            }
+            return;
+        }
+
+        long timeLimitMillis = resolveTimeAttackMillis();
+        if (timeLimitMillis <= 0L) {
+            timerTextView.setVisibility(View.GONE);
+            return;
+        }
+
+        timerTextView.setVisibility(View.VISIBLE);
+        updateTimerText(timeLimitMillis);
+
+        questionTimer = new CountDownTimer(timeLimitMillis, 1000L) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                updateTimerText(millisUntilFinished);
+            }
+
+            @Override
+            public void onFinish() {
+                if (timerTextView != null) {
+                    timerTextView.setText(getString(R.string.quiz_timer_expired));
+                }
+                handleTimeAttackFailure();
+            }
+        }.start();
+    }
+
+    private void cancelTimeAttackTimer() {
+        if (questionTimer != null) {
+            questionTimer.cancel();
+            questionTimer = null;
+        }
+    }
+
+    private void handleTimeAttackFailure() {
+        if (answered) {
+            return;
+        }
+
+        cancelTimeAttackTimer();
+        answered = true;
+        setAnswerInputsEnabled(false);
+
+        if (hardcoreMode) {
+            handleHardcoreFailure();
+            return;
+        }
+
+        resultTextView.setVisibility(VISIBLE);
+        resultTextView.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_light));
+        resultTextView.setText(getString(R.string.quiz_timer_expired));
+
+        validationButton.setEnabled(true);
+        validationButton.setText(hasNextQuestion() ? getString(R.string.quiz_next) : getString(R.string.quiz_finish));
+    }
+
+    private void updateTimerText(long millisRemaining) {
+        if (timerTextView == null) {
+            return;
+        }
+        long totalSeconds = millisRemaining / 1000L;
+        long minutes = totalSeconds / 60L;
+        long seconds = totalSeconds % 60L;
+        timerTextView.setText(String.format(Locale.getDefault(), "%01d:%02d", minutes, seconds));
+    }
+
+    private long resolveTimeAttackMillis() {
+        if (hardcoreMode) {
+            return 10_000L;
+        }
+        switch (selectedDifficultyLevel) {
+            case 0:
+                return 60_000L;
+            case 1:
+                return 30_000L;
+            case 2:
+                return 20_000L;
+            case 3:
+                return 10_000L;
+            default:
+                return 45_000L;
+        }
+    }
+
     private void handleHardcoreFailure() {
-    resultTextView.setText("Explosion ! Mauvaise réponse en mode Hardcore.");
+        cancelTimeAttackTimer();
+        resultTextView.setText("Explosion ! Mauvaise réponse en mode Hardcore.");
         resultTextView.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_light));
         validationButton.setEnabled(false);
-    validationButton.setText("Boom !!");
+        validationButton.setText("Boom !!");
         setAnswerInputsEnabled(false);
 
         View root = findViewById(R.id.main);
@@ -316,7 +420,7 @@ public class QuizActivity extends AppCompatActivity {
             finishAffinity();
             Process.killProcess(Process.myPid());
             System.exit(0);
-        }, 800L);
+        }, 2500L);
     }
 
     private void setAnswerInputsEnabled(boolean enabled) {
@@ -332,6 +436,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onStop();
         releaseMediaPlayer();
         releaseExplosionPlayer();
+        cancelTimeAttackTimer();
     }
 
     private DifficultyConfig resolveDifficultyConfig(int difficulty) {

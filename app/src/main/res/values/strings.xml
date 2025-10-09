@@ -31,4 +31,5 @@
     <string name="quiz_options_difficulty_label">Sélectionne une difficulté</string>
     <string name="quiz_option_mode_hardcore">Mode Hardcore</string>
     <string name="quiz_option_time_attack">Mode Time Attack</string>
+    <string name="quiz_timer_expired">Temps écoulé !</string>
 </resources>
