@@ -2,6 +2,7 @@ package com.example.flashcard;
 
 import static android.view.View.VISIBLE;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -35,49 +36,88 @@ public class QuizActivity extends AppCompatActivity {
             return insets;
 
         });
-        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.prout);
+        boolean answered = false;
+        int currentQuestionIndex = 0;//a set dans le menu et a transferer a chaque itération de questions
+        Quiz.Question question1 = new Quiz.Question("vrai","prout",3,R.drawable.drapeau);
+        ArrayList<Quiz.Question> liste = new ArrayList<Quiz.Question>();
+        liste.add(question1);
+        Quiz quiz = new Quiz(liste,1);
+        dynamicAnswers(quiz.questions.get(currentQuestionIndex));
+        MediaPlayer mediaPlayer = setup(quiz);
         Button play = findViewById(R.id.audioButton);
         play.setOnClickListener(view -> {
             mediaPlayer.start();
         });
-        Quiz.Question question1 = new Quiz.Question("vrai","fff",3,R.drawable.drapeau);
-        ArrayList<Quiz.Question> liste = new ArrayList<Quiz.Question>();
-        liste.add(question1);
-        Quiz quiz = new Quiz(liste,1);
-        setupAnswers(quiz.questions.get(0));
-
-
         Button validButton = findViewById(R.id.validationButton);
-        validButton.setOnClickListener(view ->{
-            Log.d("QuizActivity","test ");
-            checkResult(quiz.questions.get(0));
-        });
+        if(!answered){
+            validButton.setOnClickListener(view ->{
+                checkResult(quiz.questions.get(currentQuestionIndex));
+                validButton.setText("Continuer");
+            });
+        }else{
+            validButton.setOnClickListener(view ->{
+                Intent intent = new Intent(this, QuizActivity.class);
+
+            });
+        }
 
 
     }
+    public static int getRandom(int min, int max) {
+
+        int range = (max - min) + 1;
+        int random = (int) ((range * Math.random()) + min);
+        return random;
+    }
+    public MediaPlayer setup(Quiz quiz){
+        Quiz.Question currentQuestion = quiz.questions.get(getRandom(1,quiz.numberOfQuestions)-1);
+        final int resourceId = getResources().getIdentifier(currentQuestion.filePath,"raw",this.getPackageName());
+        MediaPlayer mediaPlayer = MediaPlayer.create(this,resourceId);
+        setupAnswers(currentQuestion);
+        return mediaPlayer;
+    }
+    public void dynamicAnswers(Quiz.Question question){
+        // pour chaque reponses que je veux, je créer un radioButton
+        RadioGroup radioGroup = findViewById(R.id.answerRadioGroup);
+        for(int i = 0; i < question.numberOfAnswers; i++ ){
+            // instancie nouveau radioButton
+            RadioButton radioButton = new RadioButton(this);
+            radioButton.setText(question.answer);
+            radioGroup.addView(radioButton);
+        }
+    }
     public void setupAnswers(Quiz.Question question){
         RadioGroup answerRadioGroup = findViewById(R.id.answerRadioGroup);
-        int id = answerRadioGroup.getChildAt((int) (Math.random()*3)).getId();
-        TextView view = findViewById(id);
-        view.setText(question.answer);
+        int indexGoodAnswer = (int) getRandom(0,question.numberOfAnswers-1);
+        for(int i = 0 ; i < question.numberOfAnswers;i++){
+            if(i == indexGoodAnswer){
+                int id = answerRadioGroup.getChildAt(indexGoodAnswer).getId();
+                TextView view = findViewById(id);
+                view.setText(question.answer);
+            }else{
+                int id = answerRadioGroup.getChildAt(i).getId();
+                TextView view = findViewById(id);
+                view.setText("Mauvaise Réponse");
+            }
+        }
     }
 
     public void checkResult(Quiz.Question question){
         RadioGroup radioGroup = findViewById(R.id.answerRadioGroup);
 
             int idChecked = radioGroup.getCheckedRadioButtonId();
-            Log.d("QuizActivity","caca");
-            RadioButton answer = findViewById(radioGroup.getChildAt(idChecked).getId());
+            RadioButton answer = findViewById(idChecked);
             String userAnswer = answer.getText().toString();
             TextView textView = findViewById(R.id.resultText);
             if(userAnswer.equals(question.answer)){
-                textView.setText("Bien joué");
+                textView.setText("Bonne Réponse");
                 textView.setVisibility(VISIBLE);
             }
             else {
-                textView.setText("t'as perdu");
+                textView.setText("Mauvaise Réponse");
                 textView.setVisibility(VISIBLE);
             }
+
 
     };
 
