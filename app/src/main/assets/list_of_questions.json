@@ -1,0 +1,100 @@
+{
+  "numberOfQuestions": 3,
+  "questions": [
+    {
+      "answer": "Liam",
+      "filePath": "liam_audio",
+      "numberOfAnswers": 3,
+      "picture": "liam_image"
+    },
+    {
+      "answer": "Strauss",
+      "filePath": "strauss_audio",
+      "numberOfAnswers": 3,
+      "picture": "strauss_image"
+    },
+    {
+      "answer": "Enrique",
+      "filePath": "enrique_audio",
+      "numberOfAnswers": 3,
+      "picture": "enrique_image"
+    },
+    {
+      "answer": "Mateis",
+      "filePath": "mateis_audio",
+      "numberOfAnswers": 3,
+      "picture": "mateis_image"
+    },
+    {
+      "answer": "Axel",
+      "filePath": "axel_audio",
+      "numberOfAnswers": 3,
+      "picture": "axel_image"
+    },
+    {
+      "answer": "Ghazi",
+      "filePath": "ghazi_audio",
+      "numberOfAnswers": 3,
+      "picture": "ghazi_image"
+    },
+    {
+      "answer": "Adam",
+      "filePath": "adam_audio",
+      "numberOfAnswers": 4,
+      "picture": "adam_image"
+    },
+    {
+      "answer": "Celestin",
+      "filePath": "celestin_audio",
+      "numberOfAnswers": 4,
+      "picture": "celestin_image"
+    },
+    {
+      "answer": "Mathys",
+      "filePath": "mathys_audio",
+      "numberOfAnswers": 4,
+      "picture": "mathys_image"
+    },
+    {
+      "answer": "Raphael",
+      "filePath": "raphael_audio",
+      "numberOfAnswers": 4,
+      "picture": "raphael_image"
+    },
+    {
+      "answer": "Lenny",
+      "filePath": "lenny_audio",
+      "numberOfAnswers": 4,
+      "picture": "lenny_image"
+    },
+    {
+      "answer": "Oualie",
+      "filePath": "oualie_audio",
+      "numberOfAnswers": 4,
+      "picture": "oualie_image"
+    }
+  ],
+  "awserPossible": [
+    "Samuel",
+    "Lucas",
+    "Nino",
+    "Maximilien",
+    "Axel",
+    "Inès",
+    "Ghazi",
+    "Adam",
+    "Celestin",
+    "Robin",
+    "Raphaël",
+    "Oualie",
+    "Draxan",
+    "Florian",
+    "Mateis",
+    "Lenny",
+    "Louis",
+    "Antonin",
+    "Strauss",
+    "Liam",
+    "Enrique"
+  ]
+}
