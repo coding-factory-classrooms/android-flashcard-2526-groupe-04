@@ -2,4 +2,7 @@
     <string name="app_name">Flashcard</string>
     <string name="quiz_results_title">Résultat du quiz</string>
     <string name="about_button">À propos</string>
+    <string name="difficulty_label">Niveau de difficulté : %1$s</string>
+    <string name="score_label">Score : %1$d / %2$d</string>
+    <string name="success_label">Réussite : %1$.0f%%</string>
 </resources>
