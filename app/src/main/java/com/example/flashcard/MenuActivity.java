@@ -1,5 +1,7 @@
 package com.example.flashcard;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.HashMap;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -30,7 +34,7 @@ public class MenuActivity extends AppCompatActivity {
         Button quiz = findViewById(R.id.quizButton);
         quiz.setOnClickListener(v -> {
             Intent intent = new Intent(this, QuizActivity.class);
-            startActivity(intent);
+            showListView();
         });
 
         // Button "Statistiques"
@@ -54,5 +58,44 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+    }
+
+    private void showListView() {
+        String[] items = {
+                "Facile",
+                "Moyen",
+                "Difficile",
+                "Hardcore"
+        };
+
+        // Création du dictionnaire "traduction"
+        HashMap<String, Integer> traduction = new HashMap<>();
+
+        // Dictionnaire permettant de traduire le String en int pour le QuizActivity
+        traduction.put("Facile", 0);
+        traduction.put("Moyen", 1);
+        traduction.put("Difficile", 2);
+        traduction.put("Hardcore", 3);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select diff");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Récupère la difficulté choisie
+                String choix = items[which];
+
+                // Traduction en entier
+                Integer difficulty = traduction.get(choix);
+
+                android.util.Log.d(TAG, "Difficulty: " + difficulty);
+
+                Intent intent = new Intent(MenuActivity.this, QuizActivity.class);
+                intent.putExtra("difficulty", difficulty);
+                startActivity(intent);
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
