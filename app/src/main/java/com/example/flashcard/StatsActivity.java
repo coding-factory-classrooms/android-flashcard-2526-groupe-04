@@ -36,8 +36,8 @@ public class StatsActivity extends AppCompatActivity {
                 ? ((double) correctAnswers / totalQuestions) * 100
                 : 0;
 
-        textViewDifficulty.setText("Niveau de difficulté : " + difficulty);
-        textViewScore.setText(String.format(Locale.getDefault(), "Score : %d / %d", correctAnswers, totalQuestions));
-        textViewPercentage.setText(String.format(Locale.getDefault(), "Réussite : %.0f%%", percentage));
+        textViewDifficulty.setText(getString(R.string.difficulty_label, difficulty));
+        textViewScore.setText(getString(R.string.score_label, correctAnswers, totalQuestions));
+        textViewPercentage.setText(getString(R.string.success_label, percentage));
     }
 }
