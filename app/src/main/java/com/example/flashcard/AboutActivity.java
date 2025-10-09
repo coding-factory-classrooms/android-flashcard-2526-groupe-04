@@ -1,6 +1,7 @@
 package com.example.flashcard;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +21,9 @@ public class AboutActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        TextView textViewAppName = findViewById(R.id.textViewAppName);
+
+        textViewAppName.setText(R.string.app_name);
     }
 }
