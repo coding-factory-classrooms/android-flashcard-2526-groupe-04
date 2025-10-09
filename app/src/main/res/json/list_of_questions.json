@@ -4,37 +4,25 @@
     {
       "answer": "Liam",
       "filePath": "liam_audio",
-      "numberOfAnswers": 3,
+      "numberOfAnswers": 4,
       "picture": "liam_image"
     },
     {
       "answer": "Strauss",
       "filePath": "strauss_audio",
-      "numberOfAnswers": 3,
+      "numberOfAnswers": 4,
       "picture": "strauss_image"
     },
     {
-      "answer": "Enrique",
-      "filePath": "enrique_audio",
-      "numberOfAnswers": 3,
-      "picture": "enrique_image"
-    },
-    {
-      "answer": "Mateis",
-      "filePath": "mateis_audio",
-      "numberOfAnswers": 3,
-      "picture": "mateis_image"
-    },
-    {
-      "answer": "Axel",
-      "filePath": "axel_audio",
-      "numberOfAnswers": 3,
-      "picture": "axel_image"
+      "answer": "Mael",
+      "filePath": "mael_audio",
+      "numberOfAnswers": 4,
+      "picture": "mael_image"
     },
     {
       "answer": "Ghazi",
       "filePath": "ghazi_audio",
-      "numberOfAnswers": 3,
+      "numberOfAnswers": 4,
       "picture": "ghazi_image"
     },
     {
@@ -50,10 +38,10 @@
       "picture": "celestin_image"
     },
     {
-      "answer": "Mathys",
-      "filePath": "mathys_audio",
+      "answer": "Draxan",
+      "filePath": "draxan_audio",
       "numberOfAnswers": 4,
-      "picture": "mathys_image"
+      "picture": "draxan_image"
     },
     {
       "answer": "Raphael",
@@ -68,10 +56,28 @@
       "picture": "lenny_image"
     },
     {
+      "answer": "Ines",
+      "filePath": "ines_audio",
+      "numberOfAnswers": 4,
+      "picture": "ines_image"
+    },
+    {
       "answer": "Oualie",
       "filePath": "oualie_audio",
       "numberOfAnswers": 4,
       "picture": "oualie_image"
+    },
+    {
+      "answer": "Celestin",
+      "filePath": "celestin_audio",
+      "numberOfAnswers": 4,
+      "picture": "celestin_image"
+    },
+    {
+      "answer": "Antonin",
+      "filePath": "antonin_audio",
+      "numberOfAnswers": 4,
+      "picture": "antonin_image"
     }
   ],
   "awserPossible": [
@@ -79,7 +85,7 @@
     "Lucas",
     "Nino",
     "Maximilien",
-    "Axel",
+    "Mael",
     "Inès",
     "Ghazi",
     "Adam",
