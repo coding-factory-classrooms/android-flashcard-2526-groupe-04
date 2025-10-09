@@ -1,5 +1,6 @@
 package com.example.flashcard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -28,5 +29,9 @@ public class MenuActivity extends AppCompatActivity {
         Log.d(TAG, "Hello Flashcard");
 
         Button aboutButton = findViewById(R.id.aboutButton);
+        aboutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, AboutActivity.class);
+            startActivity(intent);
+        });
     }
 }
