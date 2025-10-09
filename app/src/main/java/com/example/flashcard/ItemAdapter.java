@@ -1,5 +1,6 @@
 package com.example.flashcard;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
-    private List<Quiz.Question> questions;
+    private final List<Quiz.Question> questions;
 
     public ItemAdapter(List<Quiz.Question> questions) {
         this.questions = questions;
@@ -28,8 +30,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Quiz.Question question = questions.get(position);
-        holder.textViewTitle.setText("Question " + (position + 1) + " : ");
+        holder.bind(questions, position);
     }
 
     @Override
@@ -38,11 +39,26 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewTitle;
+        private final TextView textViewTitle;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textView);
+        }
+
+        void bind(List<Quiz.Question> questions, int position) {
+            textViewTitle.setText(String.format(Locale.getDefault(), "Question %d :", position + 1));
+
+            itemView.setOnClickListener(v -> {
+                int adapterPosition = getBindingAdapterPosition();
+                if (adapterPosition == RecyclerView.NO_POSITION) {
+                    return;
+                }
+                Quiz.Question selectedQuestion = questions.get(adapterPosition);
+                Intent intent = new Intent(v.getContext(), QuizActivity.class);
+                intent.putExtra(QuizActivity.EXTRA_SINGLE_QUESTION, selectedQuestion);
+                v.getContext().startActivity(intent);
+            });
         }
     }
 }

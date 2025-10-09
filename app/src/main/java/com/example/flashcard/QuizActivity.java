@@ -4,6 +4,7 @@ import static android.view.View.VISIBLE;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,9 +30,11 @@ import java.util.Locale;
 public class QuizActivity extends AppCompatActivity {
 
     private static final String EXTRA_DIFFICULTY = "difficulty";
+    public static final String EXTRA_SINGLE_QUESTION = "EXTRA_SINGLE_QUESTION";
     private static final String EXTRA_STATS_DIFFICULTY = "QUIZ_DIFFICULTY";
     private static final String EXTRA_STATS_CORRECT = "CORRECT_ANSWERS";
     private static final String EXTRA_STATS_TOTAL = "TOTAL_QUESTIONS";
+    private static final int SINGLE_QUESTION_DIFFICULTY = -1;
 
     private Quiz quiz;
     private Quiz.Question currentQuestion;
@@ -41,6 +44,7 @@ public class QuizActivity extends AppCompatActivity {
     private int correctAnswers = 0;
     private String difficultyLabel;
     private DifficultyConfig difficultyConfig;
+    private boolean singleQuestionMode = false;
 
     private RadioGroup answerRadioGroup;
     private TextView questionTextView;
@@ -61,6 +65,12 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         initViews();
+
+        Quiz.Question singleQuestion = extractSingleQuestionFromIntent();
+        if (singleQuestion != null) {
+            startSingleQuestionMode(singleQuestion);
+            return;
+        }
 
         int difficultyLevel = getIntent().getIntExtra(EXTRA_DIFFICULTY, 0);
         difficultyConfig = resolveDifficultyConfig(difficultyLevel);
@@ -126,6 +136,31 @@ public class QuizActivity extends AppCompatActivity {
                 runOnUiThread(() -> showErrorAndFinish(getString(R.string.quiz_error_load)));
             }
         });
+    }
+
+    private Quiz.Question extractSingleQuestionFromIntent() {
+        if (getIntent() == null) {
+            return null;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return getIntent().getParcelableExtra(EXTRA_SINGLE_QUESTION, Quiz.Question.class);
+        }
+        return getIntent().getParcelableExtra(EXTRA_SINGLE_QUESTION);
+    }
+
+    private void startSingleQuestionMode(Quiz.Question question) {
+        if (question == null) {
+            showErrorAndFinish(getString(R.string.quiz_error_no_questions));
+            return;
+        }
+
+        ArrayList<Quiz.Question> singleQuestionList = new ArrayList<>();
+        singleQuestionList.add(question);
+        quiz = new Quiz(singleQuestionList, SINGLE_QUESTION_DIFFICULTY);
+        currentQuestionIndex = 0;
+        correctAnswers = 0;
+        singleQuestionMode = true;
+        showQuestion();
     }
 
     private void showQuestion() {
@@ -208,6 +243,10 @@ public class QuizActivity extends AppCompatActivity {
             currentQuestionIndex += 1;
             showQuestion();
         } else {
+            if (singleQuestionMode) {
+                finish();
+                return;
+            }
             Intent intent = new Intent(this, StatsActivity.class);
             intent.putExtra(EXTRA_STATS_DIFFICULTY, difficultyLabel);
             intent.putExtra(EXTRA_STATS_CORRECT, correctAnswers);
