@@ -1,0 +1,44 @@
+{
+  "difficulty": 2,
+  "numberOfQuestions": 3,
+  "questions": [
+    {
+      "answer": "Raphael",
+      "filePath": "raphael_audio",
+      "numberOfAnswers": 4,
+      "picture": "raphael_image"
+    },
+    {
+      "answer": "Lenny",
+      "filePath": "lenny_audio",
+      "numberOfAnswers": 4,
+      "picture": "lenny_image"
+    },
+    {
+      "answer": "Oualie",
+      "filePath": "oualie_audio",
+      "numberOfAnswers": 4,
+      "picture": "oualie_image"
+    }
+  ],
+  "awserPossible": [
+    "Samuel",
+    "Lucas",
+    "Nino",
+    "Maximilien",
+    "Strauss",
+    "Inès",
+    "Enrique",
+    "Adam",
+    "Celestin",
+    "Robin",
+    "Ghazi",
+    "Mateis",
+    "Draxan",
+    "Florian",
+    "Liam",
+    "Axel",
+    "Louis",
+    "Antonin"
+  ]
+}

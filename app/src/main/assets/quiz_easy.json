@@ -1,0 +1,44 @@
+{
+  "difficulty": 0,
+  "numberOfQuestions": 3,
+  "questions": [
+    {
+      "answer": "Liam",
+      "filePath": "liam",
+      "numberOfAnswers": 3,
+      "picture": "liam_image"
+    },
+    {
+      "answer": "Strauss",
+      "filePath": "strauss",
+      "numberOfAnswers": 3,
+      "picture": "strauss_image"
+    },
+    {
+      "answer": "Enrique",
+      "filePath": "enrique_audio",
+      "numberOfAnswers": 3,
+      "picture": "enrique_image"
+    }
+  ],
+  "awserPossible": [
+    "Samuel",
+    "Lucas",
+    "Nino",
+    "Maximilien",
+    "Axel",
+    "Inès",
+    "Ghazi",
+    "Adam",
+    "Celestin",
+    "Robin",
+    "Raphaël",
+    "Oualie",
+    "Draxan",
+    "Florian",
+    "Mateis",
+    "Lenny",
+    "Louis",
+    "Antonin"
+  ]
+}

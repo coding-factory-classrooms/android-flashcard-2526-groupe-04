@@ -1,0 +1,44 @@
+{
+  "difficulty": 1,
+  "numberOfQuestions": 3,
+  "questions": [
+    {
+      "answer": "Mateis",
+      "filePath": "mateis",
+      "numberOfAnswers": 3,
+      "picture": "mateis_image"
+    },
+    {
+      "answer": "Axel",
+      "filePath": "axel",
+      "numberOfAnswers": 3,
+      "picture": "axel_image"
+    },
+    {
+      "answer": "Ghazi",
+      "filePath": "Ghazi",
+      "numberOfAnswers": 3,
+      "picture": "ghazi_image"
+    }
+  ],
+  "awserPossible": [
+    "Samuel",
+    "Lucas",
+    "Nino",
+    "Maximilien",
+    "Strauss",
+    "Inès",
+    "Enrique",
+    "Adam",
+    "Celestin",
+    "Robin",
+    "Raphaël",
+    "Oualie",
+    "Draxan",
+    "Florian",
+    "Liam",
+    "Lenny",
+    "Louis",
+    "Antonin"
+  ]
+}
