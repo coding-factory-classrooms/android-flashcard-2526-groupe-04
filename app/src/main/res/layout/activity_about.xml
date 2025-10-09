@@ -19,6 +19,28 @@
         android:layout_marginTop="40dp"
         android:gravity="center" />
 
+    <TextView
+        android:id="@+id/textViewVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        tools:text="1.2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAppName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        android:gravity="center" />
 
+    <TextView
+        android:id="@+id/textViewGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        tools:text="groupe"
+        app:layout_constraintTop_toBottomOf="@+id/textViewVersion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        android:gravity="center" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package com.example.flashcard;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -23,7 +25,18 @@ public class AboutActivity extends AppCompatActivity {
         });
 
         TextView textViewAppName = findViewById(R.id.textViewAppName);
+        TextView textViewVerion = findViewById(R.id.textViewVersion);
+        TextView textViewGroup = findViewById(R.id.textViewGroup);
+
+        try {
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = packageInfo.versionName;
+            textViewVerion.setText(getString(R.string.version_label, version));
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         textViewAppName.setText(R.string.app_name);
+        textViewGroup.setText(R.string.group);
     }
 }
