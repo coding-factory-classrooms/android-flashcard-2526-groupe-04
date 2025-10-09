@@ -1,5 +1,6 @@
 package com.example.flashcard;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.widget.TextView;
@@ -39,5 +40,10 @@ public class StatsActivity extends AppCompatActivity {
         textViewDifficulty.setText(getString(R.string.difficulty_label, difficulty));
         textViewScore.setText(getString(R.string.score_label, correctAnswers, totalQuestions));
         textViewPercentage.setText(getString(R.string.success_label, percentage));
+
+
+        Intent intent = new Intent(this, QuizActivity.class);
+        intent.putExtra("percentage", percentage);
+        startActivity(intent);
     }
 }

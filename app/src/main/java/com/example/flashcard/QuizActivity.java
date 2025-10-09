@@ -2,6 +2,7 @@ package com.example.flashcard;
 
 import static android.view.View.VISIBLE;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -54,6 +55,23 @@ public class QuizActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void scoreSharing(){
+        // we retrieve the player's score with Intent
+        Intent percentage = getIntent();
+        // we initialize it in a variable of the same type
+        double sendpercentage = percentage.getDoubleExtra("percentage" , 0);
+        // we write the message that will be shared
+        String message = "Mon score était de " + percentage +"% sur Classe Royal !!";
+        // we create a new Intent which will be shared by the user
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+        sendIntent.setType("text/plain");
+        // createChooser allows to open the Android share menu
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
     }
     public void setupAnswers(Quiz.Question question){
         RadioGroup answerRadioGroup = findViewById(R.id.answerRadioGroup);
