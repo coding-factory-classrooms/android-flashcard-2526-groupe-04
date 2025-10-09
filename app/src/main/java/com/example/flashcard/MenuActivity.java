@@ -1,23 +1,20 @@
 package com.example.flashcard;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import java.util.HashMap;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -36,10 +33,7 @@ public class MenuActivity extends AppCompatActivity {
 
         // Button "Jouer"
         Button quiz = findViewById(R.id.quizButton);
-        quiz.setOnClickListener(v -> {
-            Intent intent = new Intent(this, QuizActivity.class);
-            showListView();
-        });
+        quiz.setOnClickListener(v -> showQuizOptionsDialog());
 
         // Button "Statistiques"
         Button stats = findViewById(R.id.statsButton);
@@ -64,42 +58,36 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
-    private void showListView() {
-        String[] items = {
-                "Facile",
-                "Moyen",
-                "Difficile",
-                "Hardcore"
-        };
-
-        // Création du dictionnaire "traduction"
-        HashMap<String, Integer> traduction = new HashMap<>();
-
-        // Dictionnaire permettant de traduire le String en int pour le QuizActivity
-        traduction.put("Facile", 0);
-        traduction.put("Moyen", 1);
-        traduction.put("Difficile", 2);
-        traduction.put("Hardcore", 3);
+    private void showQuizOptionsDialog() {
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_quiz_options, null);
+        RadioGroup difficultyGroup = dialogView.findViewById(R.id.difficultyGroup);
+        CheckBox hardcoreCheckBox = dialogView.findViewById(R.id.hardcoreModeCheckbox);
+        CheckBox timeAttackCheckBox = dialogView.findViewById(R.id.timeAttackCheckbox);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select diff");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Récupère la difficulté choisie
-                String choix = items[which];
+        builder.setTitle(R.string.quiz_options_title);
+        builder.setView(dialogView);
+        builder.setPositiveButton(R.string.quiz_options_confirm, (dialog, which) -> {
+            int selectedDifficultyId = difficultyGroup.getCheckedRadioButtonId();
+            int difficulty = 0;
 
-                // Traduction en entier
-                Integer difficulty = traduction.get(choix);
-
-                android.util.Log.d(TAG, "Difficulty: " + difficulty);
-
-                Intent intent = new Intent(MenuActivity.this, QuizActivity.class);
-                intent.putExtra("difficulty", difficulty);
-                startActivity(intent);
+            if (selectedDifficultyId != -1) {
+                RadioButton selectedButton = dialogView.findViewById(selectedDifficultyId);
+                if (selectedButton != null) {
+                    Object tag = selectedButton.getTag();
+                    if (tag != null) {
+                        difficulty = Integer.parseInt(tag.toString());
+                    }
+                }
             }
+
+            Intent intent = new Intent(MenuActivity.this, QuizActivity.class);
+            intent.putExtra("difficulty", difficulty);
+            intent.putExtra(QuizActivity.EXTRA_HARDCORE_MODE, hardcoreCheckBox.isChecked());
+            intent.putExtra(QuizActivity.EXTRA_TIME_ATTACK_MODE, timeAttackCheckBox.isChecked());
+            startActivity(intent);
         });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        builder.setNegativeButton(R.string.quiz_options_cancel, (dialog, which) -> dialog.dismiss());
+        builder.show();
     }
 }

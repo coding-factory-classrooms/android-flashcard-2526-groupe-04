@@ -25,4 +25,10 @@
     <string name="quiz_difficulty_hardcore">Hardcore</string>
     <string name="quiz_difficulty_unknown">Inconnu</string>
     <string name="quiz_back_to_menu">Retour au menu</string>
+    <string name="quiz_options_title">Options du quiz</string>
+    <string name="quiz_options_confirm">Commencer</string>
+    <string name="quiz_options_cancel">Annuler</string>
+    <string name="quiz_options_difficulty_label">Sélectionne une difficulté</string>
+    <string name="quiz_option_mode_hardcore">Mode Hardcore</string>
+    <string name="quiz_option_time_attack">Mode Time Attack</string>
 </resources>

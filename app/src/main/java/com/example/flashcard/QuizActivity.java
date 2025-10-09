@@ -35,6 +35,8 @@ public class QuizActivity extends AppCompatActivity {
     private static final String EXTRA_STATS_CORRECT = "CORRECT_ANSWERS";
     private static final String EXTRA_STATS_TOTAL = "TOTAL_QUESTIONS";
     private static final int SINGLE_QUESTION_DIFFICULTY = -1;
+    public static final String EXTRA_HARDCORE_MODE = "extra_hardcore_mode";
+    public static final String EXTRA_TIME_ATTACK_MODE = "extra_time_attack_mode";
 
     private Quiz quiz;
     private Quiz.Question currentQuestion;
