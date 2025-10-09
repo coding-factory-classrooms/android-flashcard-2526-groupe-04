@@ -2,6 +2,7 @@ package com.example.flashcard;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,5 +27,6 @@ public class MenuActivity extends AppCompatActivity {
 
         Log.d(TAG, "Hello Flashcard");
 
+        Button aboutButton = findViewById(R.id.aboutButton);
     }
 }
