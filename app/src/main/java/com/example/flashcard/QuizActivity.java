@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Parcelable;
 import android.os.Process;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.LongDef;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
@@ -40,6 +43,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final int SINGLE_QUESTION_DIFFICULTY = -1;
     public static final String EXTRA_HARDCORE_MODE = "extra_hardcore_mode";
     public static final String EXTRA_TIME_ATTACK_MODE = "extra_time_attack_mode";
+    public static final String EXTRA_FAILED_ANSWERS = "EXTRA_FAILED_ANSWERS";
 
     private Quiz quiz;
     private Quiz.Question currentQuestion;
@@ -54,6 +58,7 @@ public class QuizActivity extends AppCompatActivity {
     private boolean timeAttackMode = false;
     private int defaultResultTextColor;
     private int selectedDifficultyLevel = 0;
+    private ArrayList<Quiz.Question> failedQuestions = new ArrayList<Quiz.Question>();
 
     private RadioGroup answerRadioGroup;
     private TextView questionTextView;
@@ -256,6 +261,11 @@ public class QuizActivity extends AppCompatActivity {
         resultTextView.setTextColor(defaultResultTextColor);
         resultTextView.setText(isCorrect ? getString(R.string.quiz_correct) : getString(R.string.quiz_wrong));
 
+        if(!isCorrect){
+
+            failedQuestions.add(currentQuestion);
+        }
+
         if (isCorrect) {
             correctAnswers += 1;
         } else if (hardcoreMode) {
@@ -289,6 +299,7 @@ public class QuizActivity extends AppCompatActivity {
             Intent intent = new Intent(this, StatsActivity.class);
             intent.putExtra(EXTRA_STATS_DIFFICULTY, difficultyLabel);
             intent.putExtra(EXTRA_STATS_CORRECT, correctAnswers);
+            intent.putParcelableArrayListExtra(EXTRA_FAILED_ANSWERS, failedQuestions);
             intent.putExtra(EXTRA_STATS_TOTAL, quiz != null ? quiz.numberOfQuestions : currentQuestionIndex + 1);
             startActivity(intent);
             finish();
