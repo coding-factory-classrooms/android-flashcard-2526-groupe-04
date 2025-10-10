@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".GlobalStatsActivity">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="699dp"
+        android:layout_height="899dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.493"
+        app:srcCompat="@drawable/skeleton_image" />
+
     <TextView
         android:id="@+id/textViewTotalQuestions"
         android:layout_width="wrap_content"
@@ -54,17 +66,5 @@
         app:layout_constraintEnd_toEndOf="@+id/textViewPercentage"
         app:layout_constraintStart_toStartOf="@+id/textViewPercentage"
         app:layout_constraintTop_toBottomOf="@id/textViewPercentage" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="699dp"
-        android:layout_height="899dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.493"
-        app:srcCompat="@drawable/skeleton_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
