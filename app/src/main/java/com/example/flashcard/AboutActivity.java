@@ -1,8 +1,10 @@
 package com.example.flashcard;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -27,6 +29,12 @@ public class AboutActivity extends AppCompatActivity {
         TextView textViewAppName = findViewById(R.id.textViewAppName);
         TextView textViewVerion = findViewById(R.id.textViewVersion);
         TextView textViewGroup = findViewById(R.id.textViewGroup);
+
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> {
+            Intent MenuActivity = new Intent(this, MenuActivity.class);
+            startActivity(MenuActivity);
+        });
 
         try {
             PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
