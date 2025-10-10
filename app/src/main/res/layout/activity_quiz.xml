@@ -8,20 +8,22 @@
     tools:context=".QuizActivity">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="596dp"
-        android:layout_height="977dp"
+        android:id="@+id/giantImageView"
+        android:layout_width="601dp"
+        android:layout_height="980dp"
+        android:src="@drawable/giant_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/giant_image" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/audioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:backgroundTint="#f0a625"
         android:text="Jouer le son"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +45,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="#0B0A0A"
         android:text="Question"
+        android:textColor="#0B0A0A"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/timerTextView"
         app:layout_constraintStart_toStartOf="@+id/timerTextView"
         app:layout_constraintTop_toBottomOf="@+id/timerTextView" />
@@ -52,29 +58,43 @@
         android:id="@+id/answerRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultText"/>
+        app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
 
     <Button
         android:id="@+id/validationButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="217dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="172dp"
+        android:backgroundTint="#f0a625"
         android:text="Valider"
-        app:layout_constraintEnd_toEndOf="@+id/resultText"
-        app:layout_constraintHorizontal_bias="0.541"
-        app:layout_constraintStart_toStartOf="@+id/resultText"
+        app:layout_constraintEnd_toEndOf="@+id/questionTextView"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/questionTextView"
         app:layout_constraintTop_toBottomOf="@+id/answerRadioGroup" />
 
     <TextView
         android:id="@+id/resultText"
+        android:layout_width="108dp"
+        android:layout_height="22dp"
+        android:layout_marginBottom="372dp"
+        android:text="TextView"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.887"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Bonne réponse" />
+
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/questionTextView"
-        app:layout_constraintStart_toStartOf="@+id/questionTextView"
-        app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.699"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

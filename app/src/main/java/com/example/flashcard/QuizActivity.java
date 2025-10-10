@@ -108,6 +108,7 @@ public class QuizActivity extends AppCompatActivity {
         resultTextView = findViewById(R.id.resultText);
         timerTextView = findViewById(R.id.timerTextView);
         questionImageView = findViewById(R.id.imageView);
+
         validationButton = findViewById(R.id.validationButton);
         playButton = findViewById(R.id.audioButton);
 
