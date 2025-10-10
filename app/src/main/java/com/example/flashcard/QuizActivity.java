@@ -4,6 +4,7 @@ import static android.view.View.VISIBLE;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -255,6 +256,8 @@ public class QuizActivity extends AppCompatActivity {
         resultTextView.setVisibility(VISIBLE);
         resultTextView.setTextColor(defaultResultTextColor);
         resultTextView.setText(isCorrect ? getString(R.string.quiz_correct) : getString(R.string.quiz_wrong));
+
+        addGlobalStats(isCorrect);
 
         if (isCorrect) {
             correctAnswers += 1;
@@ -511,6 +514,19 @@ public class QuizActivity extends AppCompatActivity {
         if (explosionPlayer != null) {
             explosionPlayer.release();
             explosionPlayer = null;
+        }
+    }
+
+    private void incrementGlobalStat(String key) {
+        SharedPreferences prefs = getSharedPreferences("GlobalStats", MODE_PRIVATE);
+        int current = prefs.getInt(key, 0);
+        prefs.edit().putInt(key, current + 1).apply();
+    }
+
+    private void addGlobalStats(boolean isCorrect) {
+        incrementGlobalStat("totalQuestions");
+        if (isCorrect) {
+            incrementGlobalStat("correctAnswers");
         }
     }
 }

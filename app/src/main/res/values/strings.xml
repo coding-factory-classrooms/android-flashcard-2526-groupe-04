@@ -32,4 +32,7 @@
     <string name="quiz_option_mode_hardcore">Mode Hardcore</string>
     <string name="quiz_option_time_attack">Mode Time Attack</string>
     <string name="quiz_timer_expired">Temps écoulé !</string>
+    <string name="global_questions_label">Questions : %1$d</string>
+    <string name="global_success_label">Réussite : %1$.0f%%</string>
+    <string name="global_correct_lable">Bonnes réponses : %1$d</string>
 </resources>
