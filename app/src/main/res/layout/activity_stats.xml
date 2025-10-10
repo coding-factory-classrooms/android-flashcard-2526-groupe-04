@@ -7,64 +7,84 @@
     android:layout_height="match_parent"
     tools:context=".StatsActivity">
 
-    <TextView
-        android:id="@+id/textViewStatsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/quiz_results_title"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
-        android:gravity="center" />
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="615dp"
+        android:layout_height="1057dp"
+        app:srcCompat="@drawable/barbarous_image"
+        tools:layout_editor_absoluteX="-102dp"
+        tools:layout_editor_absoluteY="-83dp" />
 
     <TextView
         android:id="@+id/textViewDifficulty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        tools:text="Niveau de difficulté : Facile"
+        android:layout_width="291dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:textColor="#0B0000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewStatsTitle"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/textViewStatsTitle"
         app:layout_constraintTop_toBottomOf="@id/textViewStatsTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
-        android:gravity="center" />
+        tools:text="Niveau de difficulté : Facile" />
 
     <TextView
         android:id="@+id/textViewScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        tools:text="Score : 8 / 10"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:textColor="#0B0000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDifficulty"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/textViewDifficulty"
         app:layout_constraintTop_toBottomOf="@id/textViewDifficulty"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Score : 8 / 10" />
+
+    <Button
+        android:id="@+id/buttonBackToMenu"
+        android:layout_width="240dp"
+        android:layout_height="45dp"
         android:layout_marginTop="20dp"
-        android:gravity="center" />
+        android:backgroundTint="#f0a625"
+        android:text="@string/quiz_back_to_menu"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/textViewPercentage"
+        app:layout_constraintStart_toStartOf="@+id/textViewPercentage"
+        app:layout_constraintTop_toBottomOf="@id/textViewPercentage" />
+
+    <TextView
+        android:id="@+id/textViewStatsTitle"
+        android:layout_width="253dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="196dp"
+        android:gravity="center"
+        android:text="@string/quiz_results_title"
+        android:textColor="#0B0000"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewPercentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:textColor="#0B0000"
+        android:textColorLink="#180707"
+        android:textSize="24sp"
         android:textStyle="bold"
-        tools:text="Réussite : 80%"
+        app:layout_constraintEnd_toEndOf="@+id/textViewScore"
+        app:layout_constraintHorizontal_bias="0.636"
+        app:layout_constraintStart_toStartOf="@+id/textViewScore"
         app:layout_constraintTop_toBottomOf="@id/textViewScore"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:gravity="center" />
+        tools:text="Réussite : 80%" />
 
-    <Button
-        android:id="@+id/buttonBackToMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/quiz_back_to_menu"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewPercentage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
