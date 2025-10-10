@@ -9,11 +9,13 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="615dp"
-        android:layout_height="1057dp"
-        app:srcCompat="@drawable/barbarous_image"
-        tools:layout_editor_absoluteX="-102dp"
-        tools:layout_editor_absoluteY="-83dp" />
+        android:layout_width="602dp"
+        android:layout_height="1049dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/barbarous_image" />
 
     <TextView
         android:id="@+id/textViewDifficulty"
