@@ -47,8 +47,8 @@
 
     <Button
         android:id="@+id/buttonBackToMenu"
-        android:layout_width="240dp"
-        android:layout_height="45dp"
+        android:layout_width="233dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="#f0a625"
         android:text="@string/quiz_back_to_menu"
@@ -61,7 +61,7 @@
         android:id="@+id/textViewStatsTitle"
         android:layout_width="253dp"
         android:layout_height="51dp"
-        android:layout_marginTop="196dp"
+        android:layout_marginTop="152dp"
         android:gravity="center"
         android:text="@string/quiz_results_title"
         android:textColor="#0B0000"
@@ -89,13 +89,15 @@
 
     <Button
         android:id="@+id/buttonShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="233dp"
+        android:layout_height="50dp"
         android:text="@string/share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBackToMenu" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonBackToMenu"
+        app:layout_constraintVertical_bias="0.037" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
