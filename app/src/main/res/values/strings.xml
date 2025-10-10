@@ -35,4 +35,6 @@
     <string name="global_questions_label">Questions : %1$d</string>
     <string name="global_success_label">Réussite : %1$.0f%%</string>
     <string name="global_correct_lable">Bonnes réponses : %1$d</string>
+    <string name="share">Partager</string>
+    <string name="share_message">Mon score était de %1$.0f%% sur Classe Royal !!</string>
 </resources>
