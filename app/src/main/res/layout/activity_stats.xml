@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StatsActivity">
+    tools:context=".StatsActivity"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="-42dp">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -21,13 +23,13 @@
         android:id="@+id/textViewDifficulty"
         android:layout_width="291dp"
         android:layout_height="49dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         android:textColor="#0B0000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewStatsTitle"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="@+id/textViewStatsTitle"
+        app:layout_constraintEnd_toEndOf="@+id/textViewScore"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="@+id/textViewScore"
         app:layout_constraintTop_toBottomOf="@id/textViewStatsTitle"
         tools:text="Niveau de difficulté : Facile" />
 
@@ -35,13 +37,13 @@
         android:id="@+id/textViewScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:textColor="#0B0000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewDifficulty"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="@+id/textViewDifficulty"
+        app:layout_constraintEnd_toEndOf="@+id/textViewPercentage"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="@+id/textViewPercentage"
         app:layout_constraintTop_toBottomOf="@id/textViewDifficulty"
         tools:text="Score : 8 / 10" />
 
@@ -49,41 +51,42 @@
         android:id="@+id/buttonBackToMenu"
         android:layout_width="233dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#f0a625"
         android:text="@string/quiz_back_to_menu"
         android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/textViewPercentage"
-        app:layout_constraintStart_toStartOf="@+id/textViewPercentage"
+        app:layout_constraintEnd_toEndOf="@+id/buttonShare"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonShare"
         app:layout_constraintTop_toBottomOf="@id/textViewPercentage" />
 
     <TextView
         android:id="@+id/textViewStatsTitle"
         android:layout_width="253dp"
         android:layout_height="51dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="108dp"
         android:gravity="center"
         android:text="@string/quiz_results_title"
         android:textColor="#0B0000"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDifficulty"
+        app:layout_constraintStart_toStartOf="@+id/textViewDifficulty"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewPercentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:textColor="#0B0000"
         android:textColorLink="#180707"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textViewScore"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toStartOf="@+id/textViewScore"
+        app:layout_constraintEnd_toEndOf="@+id/buttonBackToMenu"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/buttonBackToMenu"
         app:layout_constraintTop_toBottomOf="@id/textViewScore"
         tools:text="Réussite : 80%" />
 
@@ -94,10 +97,10 @@
         android:text="@string/share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonBackToMenu"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintVertical_bias="0.04" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
