@@ -33,6 +33,7 @@ public class StatsActivity extends AppCompatActivity {
         TextView textViewScore = findViewById(R.id.textViewScore);
         TextView textViewPercentage = findViewById(R.id.textViewPercentage);
         Button backToMenu = findViewById(R.id.buttonBackToMenu);
+        Button Share = findViewById(R.id.buttonShare);
 
         String difficulty = getIntent().getStringExtra(EXTRA_STATS_DIFFICULTY);
         if (difficulty == null || difficulty.isEmpty()) {
@@ -55,5 +56,19 @@ public class StatsActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        Share.setOnClickListener(v -> {
+            scoreSharing(percentage);
+        });
+    }
+
+    public void scoreSharing(double percentageSend){
+        String message = getString(R.string.share_message, percentageSend);
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+        sendIntent.setType("text/plain");
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
     }
 }
