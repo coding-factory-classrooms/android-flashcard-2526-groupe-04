@@ -42,6 +42,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         private final TextView textViewTitle;
 
         public ViewHolder(@NonNull View itemView) {
+            // Connect XML with java
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textView);
         }
@@ -51,9 +52,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
             itemView.setOnClickListener(v -> {
                 int adapterPosition = getBindingAdapterPosition();
+                // Verif error
                 if (adapterPosition == RecyclerView.NO_POSITION) {
                     return;
                 }
+                // Send question to quiz activity
                 Quiz.Question selectedQuestion = questions.get(adapterPosition);
                 Intent intent = new Intent(v.getContext(), QuizActivity.class);
                 intent.putExtra(QuizActivity.EXTRA_SINGLE_QUESTION, selectedQuestion);
