@@ -8,7 +8,7 @@
     tools:context=".GlobalStatsActivity">
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/skeletonImageView"
         android:layout_width="699dp"
         android:layout_height="899dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,47 +23,55 @@
         android:id="@+id/textViewTotalQuestions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        tools:text="20"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="208dp"
+        android:gravity="center"
+        android:textColor="#0B0A0A"
+        android:textSize="30dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
-        android:gravity="center" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="20" />
 
     <TextView
         android:id="@+id/textViewCorrectAnswers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        tools:text="2"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalQuestions"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="40dp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="#0B0A0A"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTotalQuestions"
+        tools:text="2" />
 
     <TextView
         android:id="@+id/textViewPercentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        tools:text="10 %"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCorrectAnswers"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="40dp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="#0B0A0A"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCorrectAnswers"
+        tools:text="10 %" />
 
     <Button
         android:id="@+id/buttonBackToMenu"
-        android:layout_width="240dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="268dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="84dp"
         android:backgroundTint="#f0a625"
         android:text="@string/quiz_back_to_menu"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/textViewPercentage"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="@+id/textViewPercentage"
         app:layout_constraintTop_toBottomOf="@id/textViewPercentage" />
 

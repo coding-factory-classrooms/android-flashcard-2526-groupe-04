@@ -66,7 +66,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="72dp"
         android:backgroundTint="#f0a625"
-        android:text="Retour"
+        android:text="Retour au menu"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textViewGroup"
